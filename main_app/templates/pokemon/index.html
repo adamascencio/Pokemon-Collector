@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>My Pokemon Collection</h1>
+{% for p in pokemon %}
+  <div class="card">
+    <div class="card-content">
+      <span class="card-title">{{ p.name }}</span>
+      <p><span class="poke-labels">Type:</span> {{ p.type }}</p>
+      <p><span class="poke-labels">Strong Against:</span> {{ p.super_effective }}</p>
+      <p><span class="poke-labels">Weaknesses:</span> {{ p.weak_against }}</p>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}
