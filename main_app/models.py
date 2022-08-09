@@ -8,4 +8,4 @@ class Pokemon(models.Model):
   weak_against = models.TextField(max_length=250)
   
   def __repr__(self):
-    return f'{self.name} - a {self.type} type pokemon)>'
+    return f'{self.name} - a {self.type} type pokemon'
