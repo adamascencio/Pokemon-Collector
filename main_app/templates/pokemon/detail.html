@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Pokemon Detail</h1>
+
+<div class="card">
+  <div class="card-content">
+    <span class="card-title">{{ pokemon.name }}</span>
+    <p><span class="poke-labels">Type:</span> {{ pokemon.type }}</p>
+    <p><span class="poke-labels">Strong Against:</span> {{ pokemon.super_effective }}</p>
+    <p><span class="poke-labels">Weaknesses:</span> {{ pokemon.weak_against }}</p>
+  </div>
+</div>
+
+{% endblock %}

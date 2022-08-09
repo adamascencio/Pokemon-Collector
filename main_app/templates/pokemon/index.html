@@ -4,7 +4,9 @@
 {% for p in pokemon %}
   <div class="card">
     <div class="card-content">
-      <span class="card-title">{{ p.name }}</span>
+      <a href="{% url 'detail' p.id %}">
+       <span class="card-title">{{ p.name }}</span>
+      </a>
       <p><span class="poke-labels">Type:</span> {{ p.type }}</p>
       <p><span class="poke-labels">Strong Against:</span> {{ p.super_effective }}</p>
       <p><span class="poke-labels">Weaknesses:</span> {{ p.weak_against }}</p>
