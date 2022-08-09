@@ -19,3 +19,11 @@ def pokemon_detail(request, pokemon_id):
 class PokemonCreate(CreateView):
   model = Pokemon
   fields = '__all__'
+
+class PokemonUpdate(UpdateView):
+  model = Pokemon
+  fields = ['type', 'super_effective', 'weak_against']
+
+class PokemonDelete(DeleteView):
+  model = Pokemon
+  success_url = '/pokemon/'
