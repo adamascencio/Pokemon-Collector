@@ -10,6 +10,10 @@
     <p><span class="poke-labels">Strong Against:</span> {{ pokemon.super_effective }}</p>
     <p><span class="poke-labels">Weaknesses:</span> {{ pokemon.weak_against }}</p>
   </div>
+  <div class="card-action">
+    <a href="{% url 'pokemon_update' pokemon.id %}">Edit</a>
+    <a href="{% url 'pokemon_delete' pokemon.id %}">Delete</a>
+  </div>
 </div>
 
 {% endblock %}
