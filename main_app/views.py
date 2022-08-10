@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import CreateView, UpdateView, DeleteView
 from .models import Pokemon
+from .forms import ItemForm
 
 def home(request):
   return render(request, 'home.html')
@@ -14,7 +15,9 @@ def pokemon_index(request):
 
 def pokemon_detail(request, pokemon_id):
   p = Pokemon.objects.get(id=pokemon_id)
-  return render(request, 'pokemon/detail.html', {'pokemon': p})
+  # instantiate ItemForm to be rendered in the template
+  item_form = ItemForm()
+  return render(request, 'pokemon/detail.html', {'pokemon': p, 'item_form': item_form})
 
 class PokemonCreate(CreateView):
   model = Pokemon
@@ -27,3 +30,11 @@ class PokemonUpdate(UpdateView):
 class PokemonDelete(DeleteView):
   model = Pokemon
   success_url = '/pokemon/'
+
+def add_item(request, pokemon_id):
+  form = ItemForm(request.POST)
+  if form.is_valid():
+    new_item = form.save(commit=False)
+    new_item.pokemon_id = pokemon_id
+    new_item.save()
+  return redirect('detail', pokemon_id=pokemon_id)
