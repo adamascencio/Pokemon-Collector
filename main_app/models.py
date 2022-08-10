@@ -11,11 +11,20 @@ ITEMS = (
 
 # Create your models here.
 
+class Move(models.Model):
+  name = models.CharField(max_length=50)
+  type = models.CharField(max_length=50)
+  damage = models.IntegerField()
+
+  def __str__(self):
+    return f'{self.name} - a {self.type} type move with {self.damage} damage points'
+
 class Pokemon(models.Model):
   name = models.CharField(max_length=255)
   type = models.CharField(max_length=255)
   super_effective = models.TextField(max_length=250)
   weak_against = models.TextField(max_length=250)
+  move_list = models.ManyToManyField(Move)
 
   def __repr__(self):
       return f'{self.name} - a {self.type} type pokemon'
