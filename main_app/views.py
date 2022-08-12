@@ -53,3 +53,7 @@ class MoveCreate(CreateView):
 class MoveUpdate(UpdateView):
   model = Move
   fields = '__all__'
+
+class MoveDelete(DeleteView):
+  model = Move
+  success_url = '/moves/'
