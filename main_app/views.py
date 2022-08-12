@@ -16,9 +16,26 @@ def pokemon_index(request):
 
 def pokemon_detail(request, pokemon_id):
   p = Pokemon.objects.get(id=pokemon_id)
+  # create tuple of all moves ids assigned to a specific pokemon
+  id_list = p.moves.all().values_list('id')
+  moves_pokemon_doesnt_have = Move.objects.exclude(id__in=id_list)
   # instantiate ItemForm to be rendered in the template
   item_form = ItemForm()
-  return render(request, 'pokemon/detail.html', {'pokemon': p, 'item_form': item_form})
+  return render(request, 'pokemon/detail.html', 
+    {
+      'pokemon': p, 
+      'item_form': item_form,
+      'moves': moves_pokemon_doesnt_have 
+    }
+  )
+
+def assoc_move(request, pokemon_id, move_id):
+  p = Pokemon.objects.get(id=pokemon_id)
+  p.moves.add(move_id)
+  return redirect('detail', pokemon_id=pokemon_id)
+
+def unassoc_move(request, pokemon_id, move_id):
+  pass
 
 class PokemonCreate(CreateView):
   model = Pokemon
