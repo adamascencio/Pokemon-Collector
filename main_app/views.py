@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, UpdateView, DeleteView
-from .models import Pokemon
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
+from .models import Move, Pokemon
 from .forms import ItemForm
 
 def home(request):
@@ -38,3 +39,17 @@ def add_item(request, pokemon_id):
     new_item.pokemon_id = pokemon_id
     new_item.save()
   return redirect('detail', pokemon_id=pokemon_id)
+
+class MoveList(ListView):
+  model = Move
+
+class MoveDetail(DetailView):
+  model = Move
+
+class MoveCreate(CreateView):
+  model = Move
+  fields = '__all__'
+
+class MoveUpdate(UpdateView):
+  model = Move
+  fields = '__all__'

@@ -19,18 +19,24 @@ class Move(models.Model):
   def __str__(self):
     return f'{self.name} - a {self.type} type move with {self.damage} damage points'
 
+  def get_absolute_url(self):
+    return reverse('moves_detail', kwargs={'pk': self.id})
+
 class Pokemon(models.Model):
   name = models.CharField(max_length=255)
   type = models.CharField(max_length=255)
   super_effective = models.TextField(max_length=250)
   weak_against = models.TextField(max_length=250)
-  move_list = models.ManyToManyField(Move)
+  moves = models.ManyToManyField(Move)
 
-  def __repr__(self):
+  def __str__(self):
       return f'{self.name} - a {self.type} type pokemon'
 
   def get_absolute_url(self):
       return reverse('detail', kwargs={'pokemon_id': self.id})
+
+  def at_max_moves(self):
+    return self.moves.count() >= 4
 
 
 class Item(models.Model):
