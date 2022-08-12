@@ -51,8 +51,16 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">
-          {{ move.name }}: {{ move.type }} type move
+          {{ move.name }}
         </span>
+        <p>Type: {{move.type}}</p>
+        <p>Damage: {{move.damage}}</p>
+      </div>
+      <div class="card-action">
+        <form action="{% url 'unassoc_move' pokemon.id move.id %}" method="POST">
+          {% csrf_token %}
+          <button type="submit" class="btn">Remove</button>
+        </form>
       </div>
     </div>
     {% endfor %}
@@ -63,13 +71,15 @@
   <!-- Available moves will come after this line -->
   <div class="col s6">
     <h3>Available Moves</h3>
-    {% if moves.count %}
+    {% if pokemon.moves.count < 4 %}
     {% for move in moves.all %}
     <div class="card">
       <div class="card-content">
         <span class="card-title">
-          {{ move.name }}: {{ move.type }} type move
+          {{ move.name }}
         </span>
+        <p>Type: {{move.type}}</p>
+        <p>Damage: {{move.damage}}</p>
       </div>
       <div class="card-action">
         <form action="{% url 'assoc_move' pokemon.id move.id %}" method="POST">

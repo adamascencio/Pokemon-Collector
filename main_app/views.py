@@ -31,11 +31,13 @@ def pokemon_detail(request, pokemon_id):
 
 def assoc_move(request, pokemon_id, move_id):
   p = Pokemon.objects.get(id=pokemon_id)
-  p.moves.add(move_id)
-  return redirect('detail', pokemon_id=pokemon_id)
+  if not p.at_max_moves():
+    p.moves.add(move_id)
+    return redirect('detail', pokemon_id=pokemon_id)
 
 def unassoc_move(request, pokemon_id, move_id):
-  pass
+  Pokemon.objects.get(id=pokemon_id).moves.remove(move_id)
+  return redirect('detail', pokemon_id=pokemon_id)
 
 class PokemonCreate(CreateView):
   model = Pokemon
