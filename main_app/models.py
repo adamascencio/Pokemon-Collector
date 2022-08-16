@@ -35,9 +35,6 @@ class Pokemon(models.Model):
   def get_absolute_url(self):
       return reverse('detail', kwargs={'pokemon_id': self.id})
 
-  def at_max_moves(self):
-    return self.moves.count() >= 4
-
 
 class Item(models.Model):
   date = models.DateField()
